@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="ru" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Savage World — PVP Server</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;900&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="styles.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Rubik', 'sans-serif'], 
+                    },
+                    colors: {
+                        theme: {
+                            bg: '#050505',
+                            card: '#0f0f11',
+                            border: '#1f1f22',
+                            primary: '#8b5cf6',
+                            primaryHover: '#7c3aed',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-theme-bg text-white font-sans antialiased relative selection:bg-theme-primary selection:text-white">
+
+    <div class="fixed top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-theme-primary/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-blue-600/10 rounded-full blur-[100px]"></div>
+        <div class="absolute top-[40%] left-[30%] w-[300px] h-[300px] bg-purple-900/20 rounded-full blur-[80px]"></div>
+    </div>
+
+    <div class="fixed w-full z-50 top-4 px-4">
+        <nav class="max-w-7xl mx-auto bg-[#0a0a0a]/90 backdrop-blur-md border border-white/5 rounded-full shadow-lg relative">
+            <div class="flex items-center justify-between px-6 h-16"> 
+                
+                <div class="flex items-center gap-3 w-1/4"> 
+                    <img src="Photo/Logo.png" alt="Logo" class="h-9 w-auto object-contain">
+                    <span class="text-xl font-black text-white hidden sm:block tracking-tighter uppercase">SAVAGE<span class="text-theme-primary">WORLD</span></span>
+                </div>
+                
+                <div class="hidden md:flex items-center gap-10 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+                    <a href="#home" class="text-xs font-bold uppercase text-gray-400 hover:text-white transition-colors tracking-widest">Главная</a>
+                    <a href="#donate" class="text-xs font-bold uppercase text-gray-400 hover:text-white transition-colors tracking-widest">Донат</a>
+                    <a href="#rules" class="text-xs font-bold uppercase text-gray-400 hover:text-white transition-colors tracking-widest">Правила</a>
+                </div>
+
+                <div class="hidden md:flex justify-end w-1/4">
+                    <button onclick="copyIP()" class="bg-theme-primary hover:bg-theme-primaryHover text-white px-6 py-2 rounded-full font-bold uppercase text-[11px] tracking-widest transition-transform hover:scale-105 shadow-[0_0_15px_rgba(139,92,246,0.4)]">
+                        Играть
+                    </button>
+                </div>
+
+                <div class="flex md:hidden ml-auto">
+                    <button onclick="toggleMenu()" class="text-white">
+                        <i data-lucide="menu" class="w-7 h-7"></i>
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </div>
+
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-black/95 pt-28 px-6 backdrop-blur-xl">
+        <div class="flex flex-col space-y-8 text-center">
+            <a href="#home" onclick="toggleMenu()" class="text-4xl font-black text-white hover:text-theme-primary tracking-tighter">ГЛАВНАЯ</a>
+            <a href="#donate" onclick="toggleMenu()" class="text-4xl font-black text-white hover:text-theme-primary tracking-tighter">ДОНАТ</a>
+            <a href="#rules" onclick="toggleMenu()" class="text-4xl font-black text-white hover:text-theme-primary tracking-tighter">ПРАВИЛА</a>
+            <button onclick="copyIP(); toggleMenu()" class="text-xl font-black uppercase text-theme-primary mt-4 border-2 border-theme-primary rounded-full py-3 tracking-widest">IP: savageworld.20tps.ru</button>
+        </div>
+        <button onclick="toggleMenu()" class="absolute top-6 right-6 text-white">
+            <i data-lucide="x" class="w-10 h-10"></i>
+        </button>
+    </div>
+
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20 px-4 relative bg-grid">
+        <div class="text-center relative z-10 max-w-5xl mx-auto flex flex-col items-center">
+            
+            <div class="inline-flex items-center gap-3 px-5 py-2 rounded-full bg-theme-card/80 border border-theme-border mb-8 backdrop-blur-sm shadow-lg">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-theme-primary opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-theme-primary"></span>
+                </span>
+                <span class="text-white font-bold text-xs tracking-widest uppercase">Online: 10</span>
+            </div>
+            
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white mb-4 leading-none tracking-tighter uppercase">
+                КАЖДЫЙ ИЗ НАС<br>
+                <span class="text-outline-simple">ВОИН</span>
+            </h1>
+            
+            <p class="text-lg md:text-2xl text-gray-400 font-medium italic mb-10 max-w-2xl tracking-wide">
+                "Каждый из нас воин, каждый из нас боец!"
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-5 w-full">
+                <button onclick="copyIP()" class="w-full sm:w-auto px-8 py-4 bg-white text-black font-black uppercase tracking-widest rounded-xl hover:bg-gray-200 transition-colors shadow-lg shadow-white/10">
+                    <span class="flex items-center justify-center gap-2">
+                        <i data-lucide="copy" class="w-5 h-5"></i>
+                        <span id="ip-text">savageworld.20tps.ru</span>
+                    </span>
+                </button>
+
+                <a href="https://dsc.gg/svinfo" target="_blank" class="w-full sm:w-auto px-8 py-4 bg-[#5865F2] text-white font-black uppercase tracking-widest rounded-xl hover:bg-[#4752C4] transition-colors flex items-center justify-center gap-2 shadow-lg shadow-[#5865F2]/20">
+                    <i data-lucide="message-circle" class="w-5 h-5"></i>
+                    Discord
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="donate" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter uppercase">МАГАЗИН</h2>
+                <div class="w-20 h-1.5 bg-theme-primary mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+                
+                <div class="donate-card">
+                    <h3 class="rank-title text-gray-400">Hero</h3>
+                    <div class="price">19 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+
+                <div class="donate-card">
+                    <h3 class="rank-title text-green-500">Titan</h3>
+                    <div class="price">29 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+
+                <div class="donate-card">
+                    <h3 class="rank-title text-blue-500">Avenger</h3>
+                    <div class="price">39 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+
+                <div class="donate-card">
+                    <h3 class="rank-title text-purple-400">OverLord</h3>
+                    <div class="price">59 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+
+                <div class="donate-card">
+                    <h3 class="rank-title text-pink-500">Magister</h3>
+                    <div class="price">89 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+
+                <div class="donate-card">
+                    <h3 class="rank-title text-yellow-500">Imperator</h3>
+                    <div class="price">119 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+
+                <div class="donate-card">
+                    <h3 class="rank-title text-orange-500">Dragon</h3>
+                    <div class="price">159 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+                
+                <div class="donate-card">
+                    <h3 class="rank-title text-emerald-500">Cobra</h3>
+                    <div class="price">199 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+
+                <div class="col-span-2 md:col-span-1 donate-card border-theme-primary/60 bg-theme-primary/10 shadow-[0_0_20px_rgba(139,92,246,0.1)]">
+                    <h3 class="rank-title text-theme-primary font-black text-2xl">GOD</h3>
+                    <div class="price">229 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button bg-theme-primary text-white hover:bg-theme-primaryHover border-none">Купить</a>
+                </div>
+
+                <div class="donate-card">
+                    <h3 class="rank-title text-indigo-300">D.Helper</h3>
+                    <div class="price">399 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+                <div class="donate-card">
+                    <h3 class="rank-title text-indigo-400">D.Moder</h3>
+                    <div class="price">499 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+                <div class="donate-card">
+                    <h3 class="rank-title text-indigo-500">D.GlModer</h3>
+                    <div class="price">599 ₽</div>
+                    <a href="https://dsc.gg/svinfo" target="_blank" class="buy-button">Купить</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="rules" class="py-24 relative">
+        <div class="max-w-6xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-5xl md:text-6xl font-black text-white mb-2 tracking-tighter uppercase">ПРАВИЛА</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                <div class="rule-simple">
+                    <span class="rule-num">3.0</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Читы</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Запрещено использование стороннего ПО.</p>
+                    </div>
+                    <div class="rule-tag text-red-500 bg-red-500/10 border border-red-500/20">Бан 28 дней</div>
+                </div>
+
+                <div class="rule-simple">
+                    <span class="rule-num">3.1</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Признание</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Признание в использовании ПО.</p>
+                    </div>
+                    <div class="rule-tag text-orange-500 bg-orange-500/10 border border-orange-500/20">Бан 14 дней</div>
+                </div>
+                
+                <div class="rule-simple">
+                    <span class="rule-num">3.2</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Помеха</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Помеха при проверке.</p>
+                    </div>
+                    <div class="rule-tag text-red-500 bg-red-500/10 border border-red-500/20">Бан 28 дней</div>
+                </div>
+
+                <div class="rule-simple">
+                    <span class="rule-num">3.3</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Чистка</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Удаление файлов при проверке.</p>
+                    </div>
+                    <div class="rule-tag text-red-500 bg-red-500/10 border border-red-500/20">Бан 28 дней</div>
+                </div>
+                
+                 <div class="rule-simple">
+                    <span class="rule-num">3.4</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Отказ</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Отказ от проверки.</p>
+                    </div>
+                    <div class="rule-tag text-red-500 bg-red-500/10 border border-red-500/20">Бан 28 дней</div>
+                </div>
+
+                 <div class="rule-simple">
+                    <span class="rule-num">3.5</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Хранение</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Хранение ПО (менее месяца).</p>
+                    </div>
+                    <div class="rule-tag text-orange-500 bg-orange-500/10 border border-orange-500/20">Бан 14 дней</div>
+                </div>
+
+                 <div class="rule-simple">
+                    <span class="rule-num">3.6</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Варпы</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Ловушки и закрытые варпы.</p>
+                    </div>
+                    <div class="rule-tag text-yellow-500 bg-yellow-500/10 border border-yellow-500/20">Бан 3 дня</div>
+                </div>
+
+                 <div class="rule-simple">
+                    <span class="rule-num">3.7</span>
+                    <div>
+                        <h4 class="font-black text-white uppercase tracking-tighter text-lg">Неадекват</h4>
+                        <p class="text-gray-400 text-sm font-medium mt-1">Неоднократное неадекватство.</p>
+                    </div>
+                    <div class="rule-tag text-blue-500 bg-blue-500/10 border border-blue-500/20">Мут 7 дней</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#020202] border-t border-white/10 pt-16 pb-10 relative overflow-hidden">
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-theme-primary/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-6">
+                        <img src="Photo/Logo.png" alt="Logo" class="h-10 w-auto">
+                        <span class="text-2xl font-black text-white tracking-tighter uppercase">SAVAGEWORLD</span>
+                    </div>
+                    <p class="text-gray-500 font-medium text-sm max-w-sm leading-relaxed">
+                        Идеальный сервер для тех, кто ищет честное PVP выживание. Присоединяйся к битве и докажи, что ты лучший воин.
+                    </p>
+                </div>
+
+                <div>
+                    <h4 class="font-black text-white mb-6 uppercase tracking-widest text-sm">Навигация</h4>
+                    <ul class="space-y-4">
+                        <li><a href="#home" class="text-gray-400 font-bold hover:text-theme-primary transition-colors text-xs uppercase tracking-wider">Главная страница</a></li>
+                        <li><a href="#donate" class="text-gray-400 font-bold hover:text-theme-primary transition-colors text-xs uppercase tracking-wider">Магазин привилегий</a></li>
+                        <li><a href="#rules" class="text-gray-400 font-bold hover:text-theme-primary transition-colors text-xs uppercase tracking-wider">Свод правил</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-black text-white mb-6 uppercase tracking-widest text-sm">Сообщество</h4>
+                    <ul class="space-y-4">
+                        <li>
+                            <a href="https://dsc.gg/svinfo" target="_blank" class="flex items-center gap-2 text-gray-400 font-bold hover:text-[#5865F2] transition-colors text-xs uppercase tracking-wider">
+                                <i data-lucide="message-circle" class="w-4 h-4"></i> Discord сервер
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="text-gray-600 text-xs font-black uppercase tracking-widest">
+                    &copy; 2025 SavageWorld. Все права защищены.
+                </div>
+                <div class="flex gap-4">
+                     <button onclick="copyIP()" class="text-gray-600 hover:text-white text-xs font-black uppercase transition-colors tracking-widest">IP: savageworld.20tps.ru</button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
